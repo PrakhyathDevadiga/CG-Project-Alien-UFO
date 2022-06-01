@@ -322,6 +322,55 @@ void mountains(){
 	glPopMatrix();
 }
 
+//deer
+void deer(){
+	
+	glBegin(GL_QUADS);
+		//body
+		glColor3f(0.9,0.5,0.1);
+		glVertex2f(45,12);
+		glVertex2f(45,20);
+		glVertex2f(58,20);
+		glVertex2f(58,12);
+		
+		//neck
+		glColor3f(0.9,0.5,0.1);
+		glVertex2f(45,12);
+		glVertex2f(40,9);
+		glVertex2f(40,13);
+		glVertex2f(45,20);
+		
+		//leg1
+		glColor3f(0.9,0.5,0.1);
+		glVertex2f(47,5);
+		glVertex2f(47,19);
+		glVertex2f(49,19);
+		glVertex2f(49,5);
+		
+		//foot1
+		glColor3f(0.0,0.0,0.0);
+		glVertex2f(47,5);
+		glVertex2f(47,4);
+		glVertex2f(49,4);
+		glVertex2f(49,5);
+		
+		//leg2
+		glColor3f(0.9,0.5,0.1);
+		glVertex2f(56,5);
+		glVertex2f(56,19);
+		glVertex2f(54,19);
+		glVertex2f(54,5);
+		
+		//foot2
+		glColor3f(0.0,0.0,0.0);
+		glVertex2f(56,5);
+		glVertex2f(56,4);
+		glVertex2f(54,4);
+		glVertex2f(54,5);
+	glEnd();
+
+}
+
 void display()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
