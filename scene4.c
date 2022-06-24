@@ -3,17 +3,11 @@
 #include<GL/glut.h>
 #include<GL/gl.h>
 #include <math.h>
-
-float rabbitY=0,count=0;
-
-void rabbitTimer(){
-	count++;
-	if(count>50 && count<=1100){
-		rabbitY+=0.05;
-	}
-	glutPostRedisplay();
-}
-
+int i;
+int points; 
+GLdouble delTheta;
+GLdouble theta;
+#define PI 3.1416
 ufo(){
 glPushMatrix();
 glColor3f(0.6,0.7,0.6);
@@ -369,124 +363,155 @@ glPopMatrix();
 
 void beam(){
 	glColor3f(0.1,0.9,0.9);
-	
+
 	glBegin(GL_POLYGON);
 		glVertex2f(44,70);
 		glVertex2f(62,70);
-		glVertex2f(68,8.3);
-		glVertex2f(38,8.3);
+		glVertex2f(68,10);
+		glVertex2f(38,10);
 	glEnd();
 }
 
-void rabbit(){
-	//body
-	glPushMatrix();
-	glColor3f(1.0,1.0,1.0);
-	glTranslatef(53.0,14+rabbitY,0.0);
-	glScalef(0.4,0.8,1);
-	glutSolidSphere(5,200,200);
-	glPopMatrix();
-	
-	//head
-	glPushMatrix();
-	glColor3f(1.0,1.0,1.0);
-	glTranslatef(53.0,16.0+rabbitY,0.0);
-	//glScalef(1,0.8,1);
-	glutSolidSphere(2.3,200,200);
-	glPopMatrix();
-	
-	//First leg
-	glPushMatrix();
-	glColor3f(1.0,1.0,1.0);
-	glTranslatef(52.0,10.0+rabbitY,0.0);
-	glScalef(1,0.8,1);
-	glutSolidSphere(0.8,200,200);
-	glPopMatrix();
-	
-	//Second leg
-	glPushMatrix();
-	glColor3f(1.0,1.0,1.0);
-	glTranslatef(54.0,10.0+rabbitY,0.0);
-	glScalef(1,0.8,1);
-	glutSolidSphere(0.8,200,200);
-	glPopMatrix();
-	
-	//Tail
-	glPushMatrix();
-	glColor3f(1.0,1.0,1.0);
-	glTranslatef(55.0,12+rabbitY,0.0);
-	//glScalef(1,0.8,1);
-	glutSolidSphere(0.7,200,200);
-	glPopMatrix();
-	
-	//Eyes
-	glColor3f(0.0,0.0,0.0);
-	glPointSize(3);
-	glBegin(GL_POINTS);
-		glVertex2f(52.3,16+rabbitY);
-		glVertex2f(53.7,16+rabbitY);
-	glEnd();
-	
-	//Ear right
-	glPushMatrix();
-	glColor3f(1.0,1.0,1.0);
-	glTranslatef(54.0,18.4+rabbitY,0.0);
-	glScalef(0.5,0.9,1);
-	glutSolidSphere(1.5,200,200);
-	glPopMatrix();
-	
-	//Ear left
-	glPushMatrix();
-	glColor3f(1.0,1.0,1.0);
-	glTranslatef(52.0,18.4+rabbitY,0.0);
-	glScalef(0.5,0.9,1);
-	glutSolidSphere(1.5,200,200);
-	glPopMatrix();
+
+
+void circle(GLdouble rad)
+{
+     points = 50;
+     delTheta = (2.0 * PI) / (GLdouble)points;
+     theta = 0.0;
+
+    glBegin(GL_POLYGON);
+    {
+        for (i = 0; i <= 50; i++, theta += delTheta)
+        {
+            glVertex2f(rad * cos(theta), rad * sin(theta));
+        }
+    }
+    glEnd();
 }
+ 
+void hare()
+{
+    /**-----------Head------------**/
+    glPushMatrix();
+    glColor3f(1, 1, 1);
+    glScalef(0.6,0.5,1);
+    glTranslatef(146,38,0);
+    circle(3);
+    glPopMatrix();
 
-void Hare() {
+    glPushMatrix();
+    glColor3f(0.5, 0.5, 0.5);
+    glScalef(0.6,0.5,0);
+    glTranslatef(145,38.5,0);
+    circle(1);
+    glPopMatrix();
+    
+    /**-----------Neck-----------**/
+    glPushMatrix();
+    glColor3f(1, 1, 1);
+    glScalef(0.6,0.6,0);
+    glTranslatef(96,1,0);
+    glBegin(GL_POLYGON);
+    glVertex3f(50,30,0);
+    glVertex3f(50,34,0);
+    glVertex3f(54,30,0);
+    glVertex3f(54,27,0);
+    glEnd();
+    glPopMatrix();
+    
+    /**-----------Leg1-----------**/
+    glPushMatrix();
+    glColor3f(1, 1, 1);
+    glScalef(.5, .7, .5);
+    glTranslatef(127,-7,0);
+    glBegin(GL_POLYGON);
+    glVertex3f(50,30,0);
+    glVertex3f(51,33,0);
+    glVertex3f(54,33,0);
+    glVertex3f(55,30,0);
+    glEnd();
+    glPopMatrix();
+    
+    /**-----------LEg2-----------**/
+    glPushMatrix();
+    glColor3f(1, 1, 1);
+    glScalef(.5, .7, .5);
+    glTranslatef(132,-7,0);
+    glBegin(GL_POLYGON);
+    glVertex3f(50,30,0);
+    glVertex3f(51,33,0);
+    glVertex3f(54,33,0);
+    glVertex3f(55,30,0);
+    glEnd();
+    glPopMatrix();
 
-	float x,y;
-	float t;
+    /**-----------Body-----------------**/
+    glPushMatrix();
+    glColor3f(1, 1, 1);
+    glScalef(0.6,0.5,1);
+    glTranslatef(149,36.5,0);
+    circle(2);
+    glPopMatrix();
 
-	//Rabbit
-	glColor3f(1.0,1.0,1.0);
-	glBegin(GL_POLYGON);
-	glVertex2i(5,21+4);
-	glVertex2i(6,21+4);
-	glVertex2i(7,22+4);
-	glVertex2i(7,23+4);
-	glVertex2i(6,24+4);
-	glVertex2i(5,24+4);
-	glVertex2i(4,23+4);
-	glVertex2i(4,22+4);
-	glEnd();
+    glPushMatrix();
+    glColor3f(1, 1, 1);
+    glScalef(0.7,0.6,1);
+    glTranslatef(131,32,0);
+    circle(3);
+    glPopMatrix();
 
-	glBegin(GL_LINES);
-	for(t=0;t<=36;t++) {
-		x=7.8+0.9*cos(t);
-		y=27.3+0.9*sin(t);
-		glVertex2f(7,26);
-		glVertex2f(x,y);
-	}
-	glEnd();
-
-	glColor3f(0.0,0.0,0.0);
-	glPointSize(4);
-	glBegin(GL_POINTS);
-	glVertex2i(7.8,27.3);
-	glEnd();
-
-	//Rabbit Ears
-	glColor3f(1.0,1.0,1.0);
-	glBegin(GL_LINES);
-	for(t=0;t<=36;t++) {
-		x=7.4+0.4*cos(t);
-		y=29.5+0.4*sin(t);
-		glVertex2f(7,27);
-		glVertex2f(x,y);
-	}
-	glEnd();
+    glPushMatrix();
+    glColor3f(1, 1, 1);
+    glScalef(.5, .7, .5);
+    glTranslatef(128,-5,0);
+    glBegin(GL_POLYGON);
+    glVertex3f(50,30,0);
+    glVertex3f(50,33,0);
+    glVertex3f(56,35.5,0);
+    glVertex3f(56,29,0);
+    glEnd();
+    glPopMatrix();
+    
+    /**tail**/
+     glPushMatrix();
+    glColor3f(1, 1, 1);
+    glScalef(.5, .7, .5);
+    glTranslatef(135,-3,0);
+    glBegin(GL_POLYGON);
+    glVertex3f(50,30,0);
+    glVertex3f(50,27,0);
+    glVertex3f(55,31.5,0);
+    glEnd();
+    glPopMatrix();
+    /**ear**/
+    glPushMatrix();
+    glColor3f(1, 1, 1);
+    glScalef(.5, .7, .5);
+    glTranslatef(126,-2,0);
+    glBegin(GL_POLYGON);
+    glVertex3f(50,31.5,0);
+    glVertex3f(53,34,0);
+    glVertex3f(51,30,0);
+    glColor3f(1, 1, 1);
+    glScalef(.5, .7, .5);
+    glTranslatef(125,-2,0);
+    glEnd();
+    glPopMatrix();
+    
+    glPushMatrix();
+    glColor3f(1, 1, 1);
+    glScalef(.5, .7, .5);
+    glTranslatef(125,-2,0);
+    glBegin(GL_POLYGON);
+    glVertex3f(50,31.5,0);
+    glVertex3f(51,34,0);
+    glVertex3f(51,30,0);
+    glColor3f(1, 1, 1);
+    glScalef(.5, .7, .5);
+    glTranslatef(125,-2,0);
+    glEnd();
+    glPopMatrix();
 }
 
 void display(){
@@ -513,11 +538,9 @@ moon();
 nightStars();
 trees();
 beam();
-rabbit();
-rabbitTimer();
 ufo();
 ufowindow();
-Hare();
+hare();
     glFlush();
 }
 
