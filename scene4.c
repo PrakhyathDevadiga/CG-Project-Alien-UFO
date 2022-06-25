@@ -8,6 +8,17 @@ int points;
 GLdouble delTheta;
 GLdouble theta;
 #define PI 3.1416
+
+float rabbitY=0,count=0;
+
+void rabbitTimer(){
+	count++;
+	if(count>50 && count<=1100){
+		rabbitY+=0.05;
+	}
+	glutPostRedisplay();
+}
+
 ufo(){
 glPushMatrix();
 glColor3f(0.6,0.7,0.6);
@@ -514,6 +525,117 @@ void hare()
     glPopMatrix();
 }
 
+void rabbit(){
+	//body
+	glPushMatrix();
+	glColor3f(1.0,1.0,1.0);
+	glTranslatef(53.0,14+rabbitY,0.0);
+	glScalef(0.4,0.8,1);
+	glutSolidSphere(5,200,200);
+	glPopMatrix();
+
+	//head
+	glPushMatrix();
+	glColor3f(1.0,1.0,1.0);
+	glTranslatef(53.0,16.0+rabbitY,0.0);
+	//glScalef(1,0.8,1);
+	glutSolidSphere(2.3,200,200);
+	glPopMatrix();
+
+	//First leg
+	glPushMatrix();
+	glColor3f(1.0,1.0,1.0);
+	glTranslatef(52.0,10.0+rabbitY,0.0);
+	glScalef(1,0.8,1);
+	glutSolidSphere(0.8,200,200);
+	glPopMatrix();
+
+	//Second leg
+	glPushMatrix();
+	glColor3f(1.0,1.0,1.0);
+	glTranslatef(54.0,10.0+rabbitY,0.0);
+	glScalef(1,0.8,1);
+	glutSolidSphere(0.8,200,200);
+	glPopMatrix();
+
+	//Tail
+	glPushMatrix();
+	glColor3f(1.0,1.0,1.0);
+	glTranslatef(55.0,12+rabbitY,0.0);
+	//glScalef(1,0.8,1);
+	glutSolidSphere(0.7,200,200);
+	glPopMatrix();
+
+	//Eyes
+	glColor3f(0.0,0.0,0.0);
+	glPointSize(3);
+	glBegin(GL_POINTS);
+		glVertex2f(52.3,16+rabbitY);
+		glVertex2f(53.7,16+rabbitY);
+	glEnd();
+
+	//Ear right
+	glPushMatrix();
+	glColor3f(1.0,1.0,1.0);
+	glTranslatef(54.0,18.4+rabbitY,0.0);
+	glScalef(0.5,0.9,1);
+	glutSolidSphere(1.5,200,200);
+	glPopMatrix();
+
+	//Ear left
+	glPushMatrix();
+	glColor3f(1.0,1.0,1.0);
+	glTranslatef(52.0,18.4+rabbitY,0.0);
+	glScalef(0.5,0.9,1);
+	glutSolidSphere(1.5,200,200);
+	glPopMatrix();
+}
+
+void Hare() {
+
+	float x,y;
+	float t;
+
+	//Rabbit
+	glColor3f(1.0,1.0,1.0);
+	glBegin(GL_POLYGON);
+	glVertex2i(5,21+4);
+	glVertex2i(6,21+4);
+	glVertex2i(7,22+4);
+	glVertex2i(7,23+4);
+	glVertex2i(6,24+4);
+	glVertex2i(5,24+4);
+	glVertex2i(4,23+4);
+	glVertex2i(4,22+4);
+	glEnd();
+
+	glBegin(GL_LINES);
+	for(t=0;t<=36;t++) {
+		x=7.8+0.9*cos(t);
+		y=27.3+0.9*sin(t);
+		glVertex2f(7,26);
+		glVertex2f(x,y);
+	}
+	glEnd();
+
+	glColor3f(0.0,0.0,0.0);
+	glPointSize(4);
+	glBegin(GL_POINTS);
+	glVertex2i(7.8,27.3);
+	glEnd();
+
+	//Rabbit Ears
+	glColor3f(1.0,1.0,1.0);
+	glBegin(GL_LINES);
+	for(t=0;t<=36;t++) {
+		x=7.4+0.4*cos(t);
+		y=29.5+0.4*sin(t);
+		glVertex2f(7,27);
+		glVertex2f(x,y);
+	}
+	glEnd();
+}
+
 void display(){
 glClear(GL_COLOR_BUFFER_BIT);
 glColor3f(0.0,0.0,0.3);
@@ -541,6 +663,9 @@ beam();
 ufo();
 ufowindow();
 hare();
+Hare();
+rabbit();
+rabbitTimer();
     glFlush();
 }
 
@@ -559,3 +684,4 @@ glutDisplayFunc(display);
 glutMainLoop();
 return 0;
 }
+
