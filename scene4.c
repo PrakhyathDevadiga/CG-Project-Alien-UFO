@@ -372,6 +372,52 @@ glutSolidSphere(25,200,200);
 glPopMatrix();
 }
 
+void Hare() {
+
+	float x,y;
+	float t;
+
+	//Rabbit
+	glColor3f(1.0,1.0,1.0);
+	glBegin(GL_POLYGON);
+	glVertex2i(5,21+4);
+	glVertex2i(6,21+4);
+	glVertex2i(7,22+4);
+	glVertex2i(7,23+4);
+	glVertex2i(6,24+4);
+	glVertex2i(5,24+4);
+	glVertex2i(4,23+4);
+	glVertex2i(4,22+4);
+	glEnd();
+
+	glBegin(GL_LINES);
+	for(t=0;t<=36;t++) {
+		x=7.8+0.9*cos(t);
+		y=27.3+0.9*sin(t);
+		glVertex2f(7,26);
+		glVertex2f(x,y);
+	}
+	glEnd();
+
+	glColor3f(0.0,0.0,0.0);
+	glPointSize(4);
+	glBegin(GL_POINTS);
+	glVertex2i(7.8,27.3);
+	glEnd();
+
+	//Rabbit Ears
+	glColor3f(1.0,1.0,1.0);
+	glBegin(GL_LINES);
+	for(t=0;t<=36;t++) {
+		x=7.4+0.4*cos(t);
+		y=29.5+0.4*sin(t);
+		glVertex2f(7,27);
+		glVertex2f(x,y);
+	}
+	glEnd();
+}
+
+
 void beam(){
 	glColor3f(0.1,0.9,0.9);
 
@@ -591,50 +637,6 @@ void rabbit(){
 	glPopMatrix();
 }
 
-void Hare() {
-
-	float x,y;
-	float t;
-
-	//Rabbit
-	glColor3f(1.0,1.0,1.0);
-	glBegin(GL_POLYGON);
-	glVertex2i(5,21+4);
-	glVertex2i(6,21+4);
-	glVertex2i(7,22+4);
-	glVertex2i(7,23+4);
-	glVertex2i(6,24+4);
-	glVertex2i(5,24+4);
-	glVertex2i(4,23+4);
-	glVertex2i(4,22+4);
-	glEnd();
-
-	glBegin(GL_LINES);
-	for(t=0;t<=36;t++) {
-		x=7.8+0.9*cos(t);
-		y=27.3+0.9*sin(t);
-		glVertex2f(7,26);
-		glVertex2f(x,y);
-	}
-	glEnd();
-
-	glColor3f(0.0,0.0,0.0);
-	glPointSize(4);
-	glBegin(GL_POINTS);
-	glVertex2i(7.8,27.3);
-	glEnd();
-
-	//Rabbit Ears
-	glColor3f(1.0,1.0,1.0);
-	glBegin(GL_LINES);
-	for(t=0;t<=36;t++) {
-		x=7.4+0.4*cos(t);
-		y=29.5+0.4*sin(t);
-		glVertex2f(7,27);
-		glVertex2f(x,y);
-	}
-	glEnd();
-}
 
 void display(){
 glClear(GL_COLOR_BUFFER_BIT);
@@ -659,12 +661,12 @@ glEnd();
 moon();
 nightStars();
 trees();
+Hare();
 beam();
+rabbit();
 ufo();
 ufowindow();
 hare();
-Hare();
-rabbit();
 rabbitTimer();
     glFlush();
 }
