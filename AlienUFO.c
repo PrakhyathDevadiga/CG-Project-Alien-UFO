@@ -6,6 +6,7 @@
 
 void output(char *s);
 void continueString(char *s);
+void continueString(char *a,char *b,char *c,char *d,char *e);
 void display();
 void keyboard(unsigned char key,int x, int y);
 
@@ -47,7 +48,7 @@ void scene5Display();
 
 //void ending();
 
-int window;
+int window,set=0;
 
 float ufoX=0,ufoY=0,ufoZ=1;
 
@@ -82,6 +83,24 @@ void continueString(char *s){
 	
 }
 
+void continueString(char *a,char *b,char *c,char *d,char *e){
+	glColor3f(1.0,1.0,1.0);
+	glPushMatrix();
+
+	glRasterPos3f(45.0,60.0,0.0);
+	output(a);
+	glRasterPos3f(7.0,40.0,0.0);
+	output(b);
+	glRasterPos3f(5.0,36.0,0.0);
+	output(c);
+	glRasterPos3f(65.0,40.0,0.0);
+	output(d);
+	glRasterPos3f(73.0,36.0,0.0);
+	output(e);
+	glPopMatrix();
+	glFlush();
+}
+
 void ufoTimer(int v){
     if(ufoX<20&&ufoY<5)
     {
@@ -95,6 +114,7 @@ void ufoTimer(int v){
     else
     ufoZ=3;
 	glutPostRedisplay();
+	//scene1Display();
  	glutTimerFunc(500,ufoTimer,0);
 }
 
@@ -895,10 +915,11 @@ void intro(){
 }
 
 void scene1(){
-	glutDestroyWindow(window);
-	glutInitWindowSize(1000,1000);
-	glutInitWindowPosition(1,1);
-	window=glutCreateWindow("Scene 1");
+//	glutDestroyWindow(window);
+//	glutInitWindowSize(1000,1000);
+//	glutInitWindowPosition(1,1);
+//	window=glutCreateWindow("Scene 1");
+	glutSetWindowTitle("Scene 1");
 	glClearColor(0.0,0.0,0.1,0.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -908,6 +929,7 @@ void scene1(){
 }
 
 void scene1Display(){
+	glClearColor(0.0,0.0,0.1,0.0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	spaceStars();
 	glColor3f(0.0,0.2,0.5);
@@ -927,10 +949,11 @@ void scene1Display(){
 }
 
 void scene2(){
-	glutDestroyWindow(window);
-	glutInitWindowSize(1000,1000);
-	glutInitWindowPosition(1,1);
-	window=glutCreateWindow("Scene 2");
+//	glutDestroyWindow(window);
+//	glutInitWindowSize(1000,1000);
+//	glutInitWindowPosition(1,1);
+//	window=glutCreateWindow("Scene 2");
+	glutSetWindowTitle("Scene 2");
 	glClearColor(0.0,0.0,0.1,0.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -974,10 +997,11 @@ void scene2Display(){
 }
 
 void scene3(){
-	glutDestroyWindow(window);
-	glutInitWindowSize(1000,1000);
-	glutInitWindowPosition(1,1);
-	window=glutCreateWindow("Scene 3");
+//	glutDestroyWindow(window);
+//	glutInitWindowSize(1000,1000);
+//	glutInitWindowPosition(1,1);
+//	window=glutCreateWindow("Scene 3");
+	glutSetWindowTitle("Scene 3");
 	glClearColor(0.0,0.0,0.1,0.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -1021,10 +1045,11 @@ void scene3Display(){
 }
 
 void scene4(){
-	glutDestroyWindow(window);
-	glutInitWindowSize(1000,1000);
-	glutInitWindowPosition(1,1);
-	window=glutCreateWindow("Scene 4");
+//	glutDestroyWindow(window);
+//	glutInitWindowSize(1000,1000);
+//	glutInitWindowPosition(1,1);
+//	window=glutCreateWindow("Scene 4");
+	glutSetWindowTitle("Scene 4");
 	glClearColor(0.0,0.0,0.1,0.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -1068,10 +1093,11 @@ void scene4Display(){
 }
 
 void scene5(){
-	glutDestroyWindow(window);
-	glutInitWindowSize(1000,1000);
-	glutInitWindowPosition(1,1);
-	window=glutCreateWindow("Scene 5");
+//	glutDestroyWindow(window);
+//	glutInitWindowSize(1000,1000);
+//	glutInitWindowPosition(1,1);
+//	window=glutCreateWindow("Scene 5");
+	glutSetWindowTitle("Scene 5");
 	glClearColor(0.0,0.0,0.1,0.0);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -1108,8 +1134,11 @@ void scene5Display(){
     hare();
     Hare();
     outgoingTimer(0);
+    
+    if(set==1)
+    	continueString("THANK YOU","NITHISH","4MT19CS098","PRAKHYATH B DEVADIGA","4MT19CS109");	
 
-  //  continueString("Press G to end");
+  //continueString("Press G to end");
 	glFlush();
 }
 
@@ -1176,7 +1205,7 @@ void keyboard(unsigned char key,int x, int y){
 		scene5();
 		
      if(key=='G'|key=='g')
-		ending();	
+		set=1;
 	glutPostRedisplay();
 }
 
